@@ -10,15 +10,16 @@ client_credentials_manager = SpotifyClientCredentials()
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 
-name = "Red Velvet" #chosen artist
+name = sys.argv[1] #chosen artist
+print(name)
 result = sp.search(name) #search query
-# print(result['tracks']['items'][0]['artists'])
+print(result['tracks']['items'][0]['artists'])
 
 # extract the Artist's uri
-rv_uri = result['tracks']['items'][0]['artists'][0]['uri']
+uri = result['tracks']['items'][0]['artists'][0]['uri']
 
 # pull all of the artist's albums
-sp_albums = sp.artist_albums(rv_uri)
+sp_albums = sp.artist_albums(uri)
 print(sp_albums)
 
 # #Store artist's albums' names' and uris in separate lists
@@ -138,4 +139,4 @@ final_df = df.sort_values('popularity', ascending=False).drop_duplicates('name')
 print(len(final_df))
 
 
-final_df.to_csv("Red_Velvet_SongInfo.txt")
+final_df.to_csv('%s_SongInfo.csv' % name)
