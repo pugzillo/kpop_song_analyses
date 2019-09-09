@@ -6,63 +6,59 @@ import numpy as np
 import pandas as pd
 from spotipy.oauth2 import SpotifyClientCredentials
 
+# spotify credentials
 client_credentials_manager = SpotifyClientCredentials()
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-# open the file and read the contents-List of artists
-f = open("List_of_KpopGroups_Wiki_Sept7_2019_v2.csv")
-lines = f.readlines()[1:]
+# open the file and read the contents-List of artists to find discography
+f = open("test_artist_list.csv")
+lines = f.readlines()[1:] # don't read in header
 results = []
 for x in lines:
     results.append(x.split(',')[0])
 
 f.close()
-# print(results)
 
-failed_searches = []
+failed_searches = [] 
 
-for i in results: 
-        name = i #chosen artist
-        print(name)
+## Get discography for each artists
+for name in results: 
+        print("Attempting search for " + str(name))
         result = sp.search(q='artist:%s genre:k-pop' % name) #search query
-        # print(result['tracks']['items'])
         
-        # failed searches, stop them
+        # failed searches, stop them if query is not found on spotify
         if not result['tracks']['items']:
                 failed_searches.append(name)
                 continue
 
-
-        # extract the Artist's uri
+        # extract the Artist's uri (spotify artist ID)
         uri = result['tracks']['items'][0]['artists'][0]['uri']
 
         # pull all of the artist's albums
         sp_albums = sp.artist_albums(uri)
-        # print(sp_albums)
 
-        # #Store artist's albums' names' and uris in separate lists
+        # #Store artist's albums' names' and uris 
         album_names = []
         album_uris = []
         
         for i in range(len(sp_albums['items'])):
                 album_names.append(sp_albums['items'][i]['name'])
                 album_uris.append(sp_albums['items'][i]['uri'])
-        
-        # print(album_names)
-        album_uris
-        #Keep names and uris in same order to keep track of duplicate albums
 
         spotify_albums = {}
 
+        # function to get song from album
         def albumSongs(uri):
-                album = uri #assign album uri to a_name
+                album = uri #assign album uri to an artist
                 spotify_albums[album] = {} #Creates dictionary for that specific album
+                
                 ## Create keys-values of empty lists inside nested dictionary for album
                 spotify_albums[album]['album'] = [] #create empty list
                 spotify_albums[album]['track_number'] = []
                 spotify_albums[album]['id'] = []
                 spotify_albums[album]['name'] = []
                 spotify_albums[album]['uri'] = []
+                
                 tracks = sp.album_tracks(album) #pull data on album tracks
 
                 for n in range(len(tracks['items'])): #for each song track
@@ -72,34 +68,40 @@ for i in results:
                         spotify_albums[album]['name'].append(tracks['items'][n]['name'])
                         spotify_albums[album]['uri'].append(tracks['items'][n]['uri'])
 
-
         album_count = 0
 
-        for i in album_uris: #each album
+        for i in album_uris: #pulls all songs from each album
                 albumSongs(i)
-                print("Album " + str(album_names[album_count]) + " songs has been added to spotify_albums dictionary")
-                album_count+=1 #Updates album count once all tracks have been added
+                print("Album " + str(album_names[album_count]) + " songs has been added to spotify_albums for %s." % name)
+                album_count+=1 #Updates album count once every track on the album has been added
 
+        # function to get audio features per song
         def audio_features(album):
         #Add new key-values to store audio features
-                spotify_albums[album]['acousticness'] = []
-                spotify_albums[album]['danceability'] = []
-                spotify_albums[album]['energy'] = []
-                spotify_albums[album]['instrumentalness'] = []
-                spotify_albums[album]['liveness'] = []
-                spotify_albums[album]['loudness'] = []
-                spotify_albums[album]['speechiness'] = []
-                spotify_albums[album]['tempo'] = []
-                spotify_albums[album]['valence'] = []
-                spotify_albums[album]['popularity'] = []
-                #create a track counter
+                def add_key_vals(prop):
+                        spotify_albums[album][prop] = []
+                for prop in [
+                        'acousticness',
+                        'danceability',
+                        'energy',
+                        'instrumentalness',
+                        'liveness',
+                        'loudness',
+                        'speechiness',
+                        'tempo',
+                        'valence',
+                        'popularity'  
+                ]:
+                        add_key_vals(prop)
+
+                #track counter
                 track_count = 0
                 for track in spotify_albums[album]['uri']:
-                        #pull audio features per track
+                        #audio features per track
                         features = sp.audio_features(track)
                         
                         #Append to relevant key-value
-                        def foo(spotify_albums, album, features, prop):
+                        def append_song_features(spotify_albums, album, features, prop):
                                 if features is None or features[0] is None:
                                         spotify_albums[album][prop].append("NA")
                                 else:
@@ -116,24 +118,13 @@ for i in results:
                                 'tempo',
                                 'valence',
                         ]:
-                                foo(spotify_albums, album, features, prop)
-                        # if 'acousticness' if features[0]:
-                        #         spotify_albums[album]['acousticness'].append(features[0]['acousticness'])
-                        # # spotify_albums[album]['acousticness'].append(features[0]['acousticness']) if features[0]['acousticness'] else next
-                        # spotify_albums[album]['danceability'].append(features[0]['danceability'])
-                        # spotify_albums[album]['energy'].append(features[0]['energy'])
-                        # spotify_albums[album]['instrumentalness'].append(features[0]['instrumentalness'])
-                        # spotify_albums[album]['liveness'].append(features[0]['liveness'])
-                        # spotify_albums[album]['loudness'].append(features[0]['loudness'])
-                        # spotify_albums[album]['speechiness'].append(features[0]['speechiness'])
-                        # spotify_albums[album]['tempo'].append(features[0]['tempo'])
-                        # spotify_albums[album]['valence'].append(features[0]['valence'])
-                        #popularity is stored elsewhere
+                                append_song_features(spotify_albums, album, features, prop)
+
                         pop = sp.track(track)
-                        spotify_albums[album]['popularity'].append(pop['popularity'])
+                        spotify_albums[album]['popularity'].append(pop['popularity']) # popularity is not stored in prop
                         track_count+=1
 
-
+        # time the api request
         sleep_min = 2
         sleep_max = 5
         start_time = time.time()
@@ -148,37 +139,39 @@ for i in results:
                         print('Elapsed Time: {} seconds'.format(time.time() - start_time))
 
         dic_df = {}
-        dic_df['album'] = []
-        dic_df['track_number'] = []
-        dic_df['id'] = []
-        dic_df['name'] = []
-        dic_df['uri'] = []
-        dic_df['acousticness'] = []
-        dic_df['danceability'] = []
-        dic_df['energy'] = []
-        dic_df['instrumentalness'] = []
-        dic_df['liveness'] = []
-        dic_df['loudness'] = []
-        dic_df['speechiness'] = []
-        dic_df['tempo'] = []
-        dic_df['valence'] = []
-        dic_df['popularity'] = []
+        def make_dictionary(prop):
+                dic_df[prop] = []
+        
+        for prop in [
+                'album',
+                'track_number',
+                'id',
+                'name',
+                'uri',
+                'acousticness',
+                'danceability',
+                'energy',
+                'instrumentalness',
+                'liveness',
+                'loudness',
+                'speechiness',
+                'tempo',
+                'valence',
+                'popularity'
+        ]:
+                make_dictionary(prop)
         
         for album in spotify_albums: 
                 for feature in spotify_albums[album]:
                         dic_df[feature].extend(spotify_albums[album][feature])
                 
-        len(dic_df['album'])   
-
-        # print(dic_df)
         df = pd.DataFrame.from_dict(dic_df)
-        # df
 
-        # print(len(df))
         final_df = df.sort_values('popularity', ascending=False).drop_duplicates('name').sort_index()
-        # print(len(final_df))
 
+        # print out file with song information
         final_df.to_csv('%s_SongInfo.csv' % name)
 
-        
-print("Failed Searches: " + ' '.join(failed_searches))
+
+failed_search_df = pd.DataFrame(failed_searches) 
+failed_search_df.to_csv('Failed_Searches.csv') #file with the failed queries
