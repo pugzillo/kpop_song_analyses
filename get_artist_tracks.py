@@ -10,7 +10,7 @@ client_credentials_manager = SpotifyClientCredentials()
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 # open the file and read the contents-List of artists
-f = open("test_artist_list.csv")
+f = open("List_of_KpopGroups_Wiki_Sept7_2019_v2.csv")
 lines = f.readlines()[1:]
 results = []
 for x in lines:
@@ -23,7 +23,7 @@ failed_searches = []
 
 for i in results: 
         name = i #chosen artist
-        # print(name)
+        print(name)
         result = sp.search(q='artist:%s genre:k-pop' % name) #search query
         # print(result['tracks']['items'])
         
@@ -99,15 +99,35 @@ for i in results:
                         features = sp.audio_features(track)
                         
                         #Append to relevant key-value
-                        spotify_albums[album]['acousticness'].append(features[0]['acousticness'])
-                        spotify_albums[album]['danceability'].append(features[0]['danceability'])
-                        spotify_albums[album]['energy'].append(features[0]['energy'])
-                        spotify_albums[album]['instrumentalness'].append(features[0]['instrumentalness'])
-                        spotify_albums[album]['liveness'].append(features[0]['liveness'])
-                        spotify_albums[album]['loudness'].append(features[0]['loudness'])
-                        spotify_albums[album]['speechiness'].append(features[0]['speechiness'])
-                        spotify_albums[album]['tempo'].append(features[0]['tempo'])
-                        spotify_albums[album]['valence'].append(features[0]['valence'])
+                        def foo(spotify_albums, album, features, prop):
+                                if features is None or features[0] is None:
+                                        spotify_albums[album][prop].append("NA")
+                                else:
+                                        if prop in features[0]:
+                                                spotify_albums[album][prop].append(features[0][prop])
+                        for prop in [
+                                'acousticness',
+                                'danceability',
+                                'energy',
+                                'instrumentalness',
+                                'liveness',
+                                'loudness',
+                                'speechiness',
+                                'tempo',
+                                'valence',
+                        ]:
+                                foo(spotify_albums, album, features, prop)
+                        # if 'acousticness' if features[0]:
+                        #         spotify_albums[album]['acousticness'].append(features[0]['acousticness'])
+                        # # spotify_albums[album]['acousticness'].append(features[0]['acousticness']) if features[0]['acousticness'] else next
+                        # spotify_albums[album]['danceability'].append(features[0]['danceability'])
+                        # spotify_albums[album]['energy'].append(features[0]['energy'])
+                        # spotify_albums[album]['instrumentalness'].append(features[0]['instrumentalness'])
+                        # spotify_albums[album]['liveness'].append(features[0]['liveness'])
+                        # spotify_albums[album]['loudness'].append(features[0]['loudness'])
+                        # spotify_albums[album]['speechiness'].append(features[0]['speechiness'])
+                        # spotify_albums[album]['tempo'].append(features[0]['tempo'])
+                        # spotify_albums[album]['valence'].append(features[0]['valence'])
                         #popularity is stored elsewhere
                         pop = sp.track(track)
                         spotify_albums[album]['popularity'].append(pop['popularity'])
@@ -150,6 +170,7 @@ for i in results:
                 
         len(dic_df['album'])   
 
+        # print(dic_df)
         df = pd.DataFrame.from_dict(dic_df)
         # df
 
