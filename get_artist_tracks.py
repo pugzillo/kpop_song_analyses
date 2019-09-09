@@ -11,7 +11,7 @@ client_credentials_manager = SpotifyClientCredentials()
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 # open the file and read the contents-List of artists to find discography
-f = open("test_artist_list.csv")
+f = open("Failed_Searches_Redo.csv")
 lines = f.readlines()[1:] # don't read in header
 results = []
 for x in lines:
@@ -72,7 +72,7 @@ for name in results:
 
         for i in album_uris: #pulls all songs from each album
                 albumSongs(i)
-                print("Album " + str(album_names[album_count]) + " songs has been added to spotify_albums for %s." % name)
+                print("Album " + str(album_names[album_count]) + " songs has been added to spotify_albums.")
                 album_count+=1 #Updates album count once every track on the album has been added
 
         # function to get audio features per song
@@ -124,7 +124,7 @@ for name in results:
                         spotify_albums[album]['popularity'].append(pop['popularity']) # popularity is not stored in prop
                         track_count+=1
 
-        # time the api request
+        # time the api requests
         sleep_min = 2
         sleep_max = 5
         start_time = time.time()
@@ -169,7 +169,7 @@ for name in results:
 
         final_df = df.sort_values('popularity', ascending=False).drop_duplicates('name').sort_index()
 
-        # print out file with song information
+        # print out file with song information for the artist
         final_df.to_csv('%s_SongInfo.csv' % name)
 
 
