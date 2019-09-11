@@ -1,0 +1,12 @@
+# mac
+.DS_Store
+# jupyter
+.ipynb_checkpoints
+# python
+__pycache__/
+# data (examples)
+# ignore a directory
+data/
+# ignore a filetype
+*.csv
+*.json

@@ -5,8 +5,14 @@ from spotipy.oauth2 import SpotifyClientCredentials
 client_credentials_manager = SpotifyClientCredentials()
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-name = "Seven O'Clock"
-results = sp.search(q='artist:%s genre:k-pop' % name)
+# name = "LOONA"
+# results = sp.search(q='artist:%s genre:k-pop' % name)
+# print(results)
+# for i, t in enumerate(results['tracks']['items']):
+#     print(' ', i, t['name'])
+
+
+results = sp.search(q='artist:fromis_9 genre:k-pop')
 print(results)
 for i, t in enumerate(results['tracks']['items']):
     print(' ', i, t['name'])
