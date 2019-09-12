@@ -10,6 +10,7 @@ Despite songs being in korean, the impact of K-pop is has gone beyond it's nativ
 ## Hypotheses:
 
 ## Dataset:
+Wikipedia was scraped to obtain a list of kpop
 
 ## Methodology:
 
