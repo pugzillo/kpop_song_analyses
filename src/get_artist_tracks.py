@@ -11,7 +11,7 @@ client_credentials_manager = SpotifyClientCredentials()
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 # open the file and read the contents-List of artists to find discography
-f = open("Failed_Searches_Redo.csv")
+f = open("Data/pudding_boybands_since2000.csv")
 lines = f.readlines()[1:] # don't read in header
 results = []
 for x in lines:
@@ -24,8 +24,9 @@ failed_searches = []
 ## Get discography for each artists
 for name in results: 
         print("Attempting search for " + str(name))
-        result = sp.search(q='artist:%s genre:k-pop' % name) #search query
-        
+        # result = sp.search(q='artist:%s genre:k-pop' % name) #search query for kpop
+        result = sp.search(q='artist:%s' % name)
+
         # failed searches, stop them if query is not found on spotify
         if not result['tracks']['items']:
                 failed_searches.append(name)
@@ -174,4 +175,4 @@ for name in results:
 
 
 failed_search_df = pd.DataFrame(failed_searches) 
-failed_search_df.to_csv('Failed_Searches.csv') #file with the failed queries
+failed_search_df.to_csv('Failed_Searches_westernboybands.csv') #file with the failed queries
