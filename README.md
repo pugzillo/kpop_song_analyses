@@ -6,13 +6,22 @@ K-pop is a genre of popular music from South Korea. However, to confine K-pop to
 
 Despite songs being in korean, the impact of K-pop is has gone beyond it's native borders and gone worldwide.
 
-
 ## Hypotheses:
+I'm interested in the musical song features that may contribute to the success of K-pop in the west. 
 
 ## Dataset:
-Wikipedia was scraped to obtain a list of kpop
+Wikipedia was scraped to obtain a list of kpop artists that have debuted from 2000-2019 (cut off: Sept 7, 2019, n = 378), along with information concerning the gender, debut year, and record company. Pudding (https://pudding.cool/2018/11/boy-bands/) was scraped to obtain a list of western boybands (n = 103) who have charted on the Billboard Hot 100 since 1980. The Spotify API was used to download all the song features for the discography. 
 
-## Methodology:
+## Methodology and Tools:
+Spotify Api
+Beautiful Soup
+Python
+Numpy
+scikitlearn
+pandas
+jupyter notebook
+matplotlib
+seaborn
 
 ## Results and Insight:
 
