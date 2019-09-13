@@ -64,7 +64,8 @@ Given an alpha value of 0.05, I can reject the null hypothesis. Therefore, there
 
 ### Song Features 
 
-![alt text](https://github.com/pugzillo/kpop_song_analyses/blob/master/images/Song_Features_Density.png
+![alt text](https://github.com/pugzillo/kpop_song_analyses/blob/master/images/Song_Features_Density.png "Logo Title Text 1")
+
 
 ## Conclusions:
 
