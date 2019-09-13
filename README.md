@@ -128,3 +128,5 @@ Kpop songs are more popular on Spotify compared to Western pop idols. When compa
 Given the multidimensional aspects of Kpop, (For example, the importance of music videos), it would be interesting to examine the differences between Western Pop Idols and Kpop Idols Youtube views and how it relates to audio streams. Also, given the increasing number of Kpop idol debuts, it would also interesting to predict long term popularity of Kpop Idols based off of their early youtube views of their debut music videos.  
 
 ## References: 
+Internet Boyband Database: https://pudding.cool/2018/11/boy-bands/
+Billboard: https://www.billboard.com/articles/columns/k-town/8500363/k-pop-closer-than-ever-american-pop-mainstream
