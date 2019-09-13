@@ -6,8 +6,19 @@ K-pop is a genre of popular music from South Korea. However, to confine K-pop to
 
 Despite songs being in korean, the impact of K-pop is has gone beyond it's native borders and gone worldwide.
 
+<p align="center"><a href="http://www.youtube.com/watch?feature=player_embedded&v=U7mPqycQ0tQ
+" target="_blank"><img src="http://img.youtube.com/vi/U7mPqycQ0tQ/0.jpg" 
+alt="Kpop Example" width="240" height="180" border="10" /></a>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=hmE9f-TEutc
+" target="_blank"><img src="http://img.youtube.com/vi/hmE9f-TEutc/0.jpg" 
+alt="Another Kpop Example" width="240" height="180" border="10" /></a>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=LlQEKB2H7z4
+" target="_blank"><img src="http://img.youtube.com/vi/LlQEKB2H7z4/0.jpg" 
+alt="Also Another Kpop Example" width="240" height="180" border="10" /></a></p>
+
+
 ## Hypotheses:
-I'm interested in the musical song features for K-pop artists and how they differ with Western pop idols. 
+I'm interested in the musical song features for K-pop artists and how they differ with Western pop idols. Hopefully, these analyses will provide insight on why K-pop has grown in popularity around the world. 
 
 ## Dataset:
 Wikipedia was scraped to obtain a list of kpop artists that have debuted from 2000-2019 (cut off: Sept 7, 2019, n = 378), along with information concerning the gender, debut year, and record company. Pudding (https://pudding.cool/2018/11/boy-bands/) was scraped to obtain a list of western boybands (n = 103) who have charted on the Billboard Hot 100 since 1980. The Spotify API was used to download all the song features for the discography:
@@ -22,6 +33,7 @@ Wikipedia was scraped to obtain a list of kpop artists that have debuted from 20
 
 ## Methodology and Tools:
 * Spotify Api
+* Spotipy Library
 * Beautiful Soup
 * Python
 * Numpy
@@ -50,7 +62,13 @@ __Mann Whitney U test P-val for Kpop Popularity < Western Popularity: 0.00000000
 
 Given an alpha value of 0.05, I can reject the null hypothesis. Therefore, there is statistical evidence suggesting that Kpop songs are more popular than western idol pop songs. 
 
+### Song Features 
+
+![alt text](https://github.com/pugzillo/kpop_song_analyses/blob/master/images/Song_Features_Density.png
+
 ## Conclusions:
+
+Kpop songs are more popular on Spotify compared to Western pop idols. When comparing the song features between Kpop Idols and Western Idols, Kpop Idols have songs that are more loud and energetic. 
 
 ## Future Work:
 
