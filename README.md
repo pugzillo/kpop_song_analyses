@@ -38,12 +38,15 @@ alt="Also Another Kpop Example" width="240" height="180" border="10" /></a></p>
 I'm interested in the musical song features for K-pop artists and how they differ with Western pop idols. Hopefully, these analyses will provide insight on why K-pop has grown in popularity around the world. 
 
 ## Dataset:
-Wikipedia was scraped to obtain a list of kpop artists that have debuted from 2000-2019 (cut off: Sept 7, 2019, n = 378), along with information concerning the gender, debut year, and record company. Pudding (https://pudding.cool/2018/11/boy-bands/) was scraped to obtain a list of western boybands (n = 103) who have charted on the Billboard Hot 100 since 1980. The Spotify API was used to download all the song features for the discography:
+Wikipedia was scraped to obtain a list of kpop artists that have debuted from 2000-2019 (cut off: Sept 7, 2019, n = 378), along with information concerning the gender, debut year, and record company. Pudding (https://pudding.cool/2018/11/boy-bands/) was scraped to obtain a list of western boybands (n = 103; 51 who first hit the Billboard Hot 100 in 2000-2018) who have charted on the Billboard Hot 100 since 1980. The Spotify API was used to download all the song features for the discography:
 
 * Acousticness
 * Danceability
 * Energy
 * Instrumentalness
+* Liveness
+* Speechiness
+* Loudness
 * Valence
 * Tempo
 * Popularity
@@ -63,7 +66,7 @@ Wikipedia was scraped to obtain a list of kpop artists that have debuted from 20
 
 ## Results and Insight:
 
-### Song Popularity 
+### Song Popularity Comparison between Western Idols and Kpop Idols
 I wanted to first to compare the popularity of songs between western pop idols and kpop idols. Song popularity is a 0-100 (most popular) measure from spotify that is based on the total number of plays and how recent those plays were. 
 
 Before comparing song popularity, I examined the distribution of the data, so I can decide what hypothesis test would be appropriate. Both distributions do not look normal, so a hypothesis test the doesn't make an assumption of a distribution would be best: the Mann Whitney U test.
@@ -73,20 +76,52 @@ Before comparing song popularity, I examined the distribution of the data, so I 
 ![alt text](https://github.com/pugzillo/kpop_song_analyses/blob/master/images/Song_Popularity_Violin.png "Logo Title Text 1")
 
 __Null Hypothesis:__ Kpop song popularity is less than Western idol song popularity. 
+
 __Alternate Hypothesis:__ Kpop song popularity is greater than Western idol song popularity. 
 
 __Mann Whitney U test P-val for Kpop Popularity < Western Popularity: 0.0000000000__
 
-Given an alpha value of 0.05, I can reject the null hypothesis. Therefore, there is statistical evidence suggesting that Kpop songs are more popular than western idol pop songs. 
+Given an alpha value of 0.05, I can reject the null hypothesis. Therefore, there is statistical evidence suggesting that Kpop songs are more popular than western idol pop songs. As of September 7, 2019, the most popular K-pop song is Boy with Luv by BTS and Halsey. 
 
-### Song Features 
+### Song Feature Comparison between Western Idols and Kpop Idols
+
+To understand the distributions of the different song features, I created histograms for each song feature for both Western and K-pop male idols from 2000 to 2019.
 
 ![alt text](https://github.com/pugzillo/kpop_song_analyses/blob/master/images/Song_Features_Density.png "Logo Title Text 1")
+
+For certain measures, there seems to be differences in the distributions: Dancebility, Energy, Instrumentalness, and loudness. Instrumentalness may be due to the inclusion of instrumental versions of songs, which is common (must check this later!).
+
+Let's check the difference in Energy, Loudness, and Danceability in the meanwhile. Given that we're doing multiple test, let's use a bonferroni corrected alpha ( alpha = 0.05/9 song features: 0.005 ).
+
+![alt text](https://github.com/pugzillo/kpop_song_analyses/blob/master/images/Song_LoudEnergyDance_Violin.png "Logo Title Text 1")
+
+### Energy
+__Null Hypothesis:__ Kpop song energy is less than Western idol song energy. 
+
+__Alternate Hypothesis:__ Kpop song energy is greater than Western idol song energy. 
+
+__Mann Whitney U test P-val for Kpop Energy < Western Energy: 0.0000000000__
+
+
+### Dancability
+__Null Hypothesis:__ Kpop song danceability is less than Western idol song danceability. 
+
+__Alternate Hypothesis:__ Kpop song danceability is greater than Western idol song danceability. 
+
+__Mann Whitney U test P-val for Kpop danceability < Western danceability: 0.0000000000__
+
+
+### Loudness
+__Null Hypothesis:__ Kpop song loudness is less than Western idol song loudness. 
+
+__Alternate Hypothesis:__ Kpop song loudness is greater than Western idol song loudness. 
+
+__Mann Whitney U test P-val for Kpop loudness < Western loudness: 0.0000000000__
 
 
 ## Conclusions:
 
-Kpop songs are more popular on Spotify compared to Western pop idols. When comparing the song features between Kpop Idols and Western Idols, Kpop Idols have songs that are more loud and energetic. 
+Kpop songs are more popular on Spotify compared to Western pop idols. When comparing the song features between Kpop Idols and Western Idols, Kpop Idols have songs that are more loud, energetic, and danceable. 
 
 ## Future Work:
 
