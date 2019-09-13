@@ -1,3 +1,20 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Kpop Song Analyses:](#kpop-song-analyses)
+  - [Background:](#background)
+  - [Hypotheses:](#hypotheses)
+  - [Dataset:](#dataset)
+  - [Methodology and Tools:](#methodology-and-tools)
+  - [Results and Insight:](#results-and-insight)
+    - [Song Popularity](#song-popularity)
+  - [Conclusions:](#conclusions)
+  - [Future Work:](#future-work)
+  - [References:](#references)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Kpop Song Analyses: 
 A statistical analysis of Korean pop (K-pop) music from 2000-2019.
 
