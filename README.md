@@ -1,4 +1,4 @@
-# Kpop Song Analyses: 
+# Kpop Song Analyses 
 A statistical analysis of Korean pop (K-pop) music from 2000-2019.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -18,7 +18,7 @@ A statistical analysis of Korean pop (K-pop) music from 2000-2019.
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Background: 
+## Background 
 K-pop is a genre of popular music from South Korea. However, to confine K-pop to just music is too simplistic. It is a fusion of music, visual art and fashion. Though K-pop has origins in the early 90s, modern K-pop truly emerged in the 2000s. K-pop artists tend to perform in boy or girl groups produced by large companies. 
 
 Despite songs being in korean, the impact of K-pop is has gone beyond it's native borders and gone worldwide.
@@ -34,10 +34,10 @@ alt="Another Kpop Example" width="240" height="180" border="10" /></a>
 alt="Also Another Kpop Example" width="240" height="180" border="10" /></a></p>
 
 
-## Hypotheses:
+## Hypotheses
 I'm interested in the musical song features for K-pop artists and how they differ with Western pop idols. Hopefully, these analyses will provide insight on why K-pop has grown in popularity around the world. 
 
-## Dataset:
+## Dataset
 Wikipedia was scraped to obtain a list of kpop artists that have debuted from 2000-2019 (cut off: Sept 7, 2019, n = 378), along with information concerning the gender, debut year, and record company. Pudding (https://pudding.cool/2018/11/boy-bands/) was scraped to obtain a list of western boybands (n = 103; 51 who first hit the Billboard Hot 100 in 2000-2018) who have charted on the Billboard Hot 100 since 1980. The Spotify API was used to download all the song features for the discography:
 
 * Acousticness
@@ -51,7 +51,9 @@ Wikipedia was scraped to obtain a list of kpop artists that have debuted from 20
 * Tempo
 * Popularity
 
-## Methodology and Tools:
+For comparisons between kpop idols and western idols, I only used boybands and those the debuted between 2000-2019 (kpop) and those that first reached the billboard hot 100 in the 2000s. 
+
+## Methodology and Tools
 * Spotify Api
 * Spotipy Library
 * Beautiful Soup
@@ -64,7 +66,7 @@ Wikipedia was scraped to obtain a list of kpop artists that have debuted from 20
 * seaborn
 * Hypotheses Testing
 
-## Results and Insight:
+## Results and Insight
 
 ### Song Popularity Comparison between Western Idols and Kpop Idols
 I wanted to first to compare the popularity of songs between western pop idols and kpop idols. Song popularity is a 0-100 (most popular) measure from spotify that is based on the total number of plays and how recent those plays were. 
@@ -95,7 +97,7 @@ Let's check the difference in Energy, Loudness, and Danceability in the meanwhil
 
 ![alt text](https://github.com/pugzillo/kpop_song_analyses/blob/master/images/Song_LoudEnergyDance_Violin.png "Logo Title Text 1")
 
-### Energy
+#### Energy
 __Null Hypothesis:__ Kpop song energy is less than Western idol song energy. 
 
 __Alternate Hypothesis:__ Kpop song energy is greater than Western idol song energy. 
@@ -103,7 +105,7 @@ __Alternate Hypothesis:__ Kpop song energy is greater than Western idol song ene
 __Mann Whitney U test P-val for Kpop Energy < Western Energy: 0.0000000000__
 
 
-### Dancability
+#### Dancability
 __Null Hypothesis:__ Kpop song danceability is less than Western idol song danceability. 
 
 __Alternate Hypothesis:__ Kpop song danceability is greater than Western idol song danceability. 
@@ -111,7 +113,7 @@ __Alternate Hypothesis:__ Kpop song danceability is greater than Western idol so
 __Mann Whitney U test P-val for Kpop danceability < Western danceability: 0.0000000000__
 
 
-### Loudness
+#### Loudness
 __Null Hypothesis:__ Kpop song loudness is less than Western idol song loudness. 
 
 __Alternate Hypothesis:__ Kpop song loudness is greater than Western idol song loudness. 
@@ -119,14 +121,14 @@ __Alternate Hypothesis:__ Kpop song loudness is greater than Western idol song l
 __Mann Whitney U test P-val for Kpop loudness < Western loudness: 0.0000000000__
 
 
-## Conclusions:
+## Conclusions
 
 Kpop songs are more popular on Spotify compared to Western pop idols. When comparing the song features between Kpop Idols and Western Idols, Kpop Idols have songs that are more loud, energetic, and danceable. 
 
-## Future Work:
+## Future Work
 
 Given the multidimensional aspects of Kpop, (For example, the importance of music videos), it would be interesting to examine the differences between Western Pop Idols and Kpop Idols Youtube views and how it relates to audio streams. Also, given the increasing number of Kpop idol debuts, it would also interesting to predict long term popularity of Kpop Idols based off of their early youtube views of their debut music videos.  
 
-## References: 
+## References 
 Internet Boyband Database: https://pudding.cool/2018/11/boy-bands/
 Billboard: https://www.billboard.com/articles/columns/k-town/8500363/k-pop-closer-than-ever-american-pop-mainstream
